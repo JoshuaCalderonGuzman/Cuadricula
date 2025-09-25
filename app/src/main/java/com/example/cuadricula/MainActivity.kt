@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -40,11 +43,20 @@ class MainActivity : ComponentActivity() {
             CuadriculaTheme {
                 Surface(modifier = Modifier.fillMaxSize().statusBarsPadding(),
                     color = MaterialTheme.colorScheme.background){
+                    DosColumnas(
+                        modifier = Modifier.padding(
+                            start = dimensionResource(R.dimen.padding_small),
+                            top = dimensionResource(R.dimen.padding_small),
+                            end = dimensionResource(R.dimen.padding_small),
+                        )
+                    )
                 }
             }
         }
     }
 }
+
+
 
 @Composable
 fun TemaDeCuadricula(topic: Topic, modifier: Modifier = Modifier) {
@@ -101,6 +113,20 @@ fun TopicPreview() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TemaDeCuadricula(topic = topic)
+        }
+    }
+}
+
+@Composable
+fun DosColumnas(modifier: Modifier = Modifier) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)),
+        modifier = modifier
+    ) {
+        items(DataSource.topics) { topic ->
+            TemaDeCuadricula(topic)
         }
     }
 }
