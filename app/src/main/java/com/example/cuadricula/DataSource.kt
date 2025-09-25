@@ -1,7 +1,5 @@
 package com.example.cuadricula
 
-import android.adservices.topics.Topic
-
 object DataSource {
     val topics = listOf(
         Topic(R.string.architecture, 58, R.drawable.architecture),
